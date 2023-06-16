@@ -1,11 +1,11 @@
 import React from 'react'
 
-const List = () => {
+function Post() {
     return (
         <div>
-            list
+            <h1>post</h1>
         </div>
     )
 }
 
-export default List
+export default Post

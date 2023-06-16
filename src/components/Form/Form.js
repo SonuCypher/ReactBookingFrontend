@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Ground = () => {
+function Form() {
     return (
         <div>
-            Ground
+            <h1>Forms</h1>
         </div>
     )
 }
 
-export default Ground
+export default Form
