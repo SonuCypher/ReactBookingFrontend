@@ -1,32 +1,27 @@
+import React,{useEffect} from "react";
 import { AppBar, Container, Typography, Grid, Grow } from "@mui/material";
+import { appBarStyle,headingStyle,imageStyle} from "./styles"
+import { useDispatch } from "react-redux";
+
+import { getPosts } from './actions/posts'
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
 import stillsites from "./images/memories.png";
-import useStyles from './styles'
 
 function App() {
-  // const classes = useStyles()
-  const appBarStyle = {
-    borderRadius: 15,
-    margin:'30px 0',
-    display:'flex',
-    flexDirection:'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-}
-const headingStyle ={
-  color:'rgba(0,183,225,1)',
-}
-const imageStyle ={
-  marginLeft:'15px',
-}
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    dispatch(getPosts())
+  },[dispatch])
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <AppBar sx={appBarStyle} position="static" color="inherit">
         <Typography sx={headingStyle} variant="h2" align="center">
           StillSites
         </Typography>
-        <img sx={imageStyle} src={stillsites} alt="stillsites" height="60" />
+        <img styles={imageStyle} src={stillsites} alt="stillsites" height="60" />
       </AppBar>
       <Grow in>
         <Container>
