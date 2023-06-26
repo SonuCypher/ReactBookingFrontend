@@ -2,11 +2,11 @@
 
 export const root= {
     '& .MuiTextField-root': {
-      margin: theme.spacing(1),
+      ma: 1,
     }
   }
   export const paper= {
-    padding: theme.spacing(2),
+    padding: 2,
   }
   export const form= {
     display: 'flex',

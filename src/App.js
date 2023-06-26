@@ -16,7 +16,8 @@ function App() {
     dispatch(getPosts())
   },[dispatch])
   return (
-    <Container maxWidth="md">
+    <React.Fragment>
+    <Container  maxWidth="lg">
       <AppBar sx={appBarStyle} position="static" color="inherit">
         <Typography sx={headingStyle} variant="h2" align="center">
           StillSites
@@ -41,6 +42,7 @@ function App() {
         </Container>
       </Grow>
     </Container>
+    </React.Fragment>
   );
 }
 
