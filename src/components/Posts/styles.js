@@ -1,12 +1,12 @@
-export default PostsStyle((theme) => ({
+export default PostsStyle = {
     mainContainer: {
       display: 'flex',
       alignItems: 'center',
     },
     smMargin: {
-      margin: theme.spacing(1),
+      margin: 2,
     },
     actionDiv: {
       textAlign: 'center',
     },
-  }));
+  };
