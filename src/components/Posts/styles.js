@@ -1,4 +1,4 @@
-export default PostsStyle = {
+const PostsStyle = {
     mainContainer: {
       display: 'flex',
       alignItems: 'center',
@@ -10,3 +10,5 @@ export default PostsStyle = {
       textAlign: 'center',
     },
   };
+
+  export default PostsStyle

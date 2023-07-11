@@ -1,5 +1,5 @@
 
-    export default postStyles ={
+     const postStyles ={
     media: {
       height: 0,
       paddingTop: '56.25%',
@@ -49,3 +49,4 @@
       justifyContent: 'space-between',
     }}
   
+    export default postStyles

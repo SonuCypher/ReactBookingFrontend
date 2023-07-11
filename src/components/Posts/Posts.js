@@ -5,21 +5,23 @@ import { CircularProgress, Grid } from '@mui/material'
 import postsStyle from './styles'
 
 function Posts() {
-    const posts = useSelector((state)=>state.postsReducer)
-    console.log(posts)
+    const posts = useSelector((state)=>state.posts)
+    console.log(posts[0])
     return (
-        
-          posts.length ? <CircularProgress />:(
-            <Grid className={postsStyle.mainContainer} container alignItems="stretch" spacing={3}>
-                {
-                    posts.map((post)=> {
-                        <Grid key={post._id} item xs={12} sm={6}>
-                            <Post post = {post} />
-                        </Grid>
-                    })
-                }
-            </Grid>
-          )
+           !posts.length ? <CircularProgress />:(
+             <Grid sx={postsStyle.mainContainer} container alignItems="stretch" spacing={3}>
+                 {
+                     posts[0].map((post)=> 
+                         (
+
+                         <Grid key={post._id} item xs={12} sm={6}>
+                             <Post post = {post} />
+                         </Grid>
+                         )
+                     )
+                 }
+             </Grid>
+           )
         
     )
 }
