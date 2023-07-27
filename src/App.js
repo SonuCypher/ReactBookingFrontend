@@ -1,12 +1,11 @@
 import React,{useEffect} from "react";
-import { AppBar, Container, Typography, Grid, Grow } from "@mui/material";
-import { appBarStyle,headingStyle,imageStyle} from "./styles"
+import { Container, Grid, Grow } from "@mui/material";
 import { useDispatch } from "react-redux";
 
 import { getPosts } from './actions/posts'
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
-import stillsites from "./images/memories.png";
+import Navbar from "./components/navbar/navbar";
 
 function App() {
   const dispatch = useDispatch()
@@ -18,12 +17,7 @@ function App() {
   return (
     <React.Fragment>
     <Container  maxWidth="lg">
-      <AppBar sx={appBarStyle} position="static" color="inherit">
-        <Typography sx={headingStyle} variant="h2" align="center">
-          StillSites
-        </Typography>
-        <img styles={imageStyle} src={stillsites} alt="stillsites" height="60" />
-      </AppBar>
+      <Navbar />
       <Grow in>
         <Container>
           <Grid
