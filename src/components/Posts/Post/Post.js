@@ -13,7 +13,9 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
+import { useDispatch } from "react-redux";
 function Post({ post }) {
+  const dispatch = useDispatch()
   return (
     <Card sx={postStyles.card}>
       <CardMedia
@@ -28,7 +30,7 @@ function Post({ post }) {
         </Typography>
       </div>
       <div style={postStyles.overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => {}}>
+        <Button style={{ color: "white" }} size="small" onClick={() => }>
           <MoreHorizIcon fontSize="default"></MoreHorizIcon>
         </Button>
       </div>

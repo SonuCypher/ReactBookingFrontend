@@ -1,13 +1,13 @@
-const postReducer=(posts=[],action)=>{
+const postReducer=(state={posts:[],currentId:null},action)=>{
     switch(action.type){
         case 'FETCH_ALL':
-            return action.payload
+            return {posts:action.payload}
         case 'CREATE':
-            return [...posts,action.payload]
+            return [...state.posts,action.payload]
         case 'UPDATE':
-            return posts.map((post)=>post.id === action.payload._id ? action.payload : post)
+            return state.posts.map((post)=>post.id === action.payload._id ? action.payload : post)
         default: 
-            return posts    
+            return state.posts    
     }
 }
 
