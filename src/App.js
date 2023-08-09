@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import { Container, Grid, Grow } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getPosts } from './actions/posts'
 import Posts from "./components/Posts/Posts";
@@ -9,11 +9,12 @@ import Navbar from "./components/navbar/navbar";
 
 function App() {
   const dispatch = useDispatch()
+  const currentId = useSelector((state)=>state.posts.currentId)
 
 
   useEffect(() => {
     dispatch(getPosts())
-  },[dispatch])
+  },[currentId,dispatch])
   return (
     <React.Fragment>
     <Container  maxWidth="lg">

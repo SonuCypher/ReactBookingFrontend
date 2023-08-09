@@ -14,8 +14,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
+import { deletePost, likePost, setCurrentId } from "../../../actions/posts";
 function Post({ post }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <Card sx={postStyles.card}>
       <CardMedia
@@ -30,7 +31,11 @@ function Post({ post }) {
         </Typography>
       </div>
       <div style={postStyles.overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => }>
+        <Button
+          style={{ color: "white" }}
+          size="small"
+          onClick={() => dispatch(setCurrentId(post._id))}
+        >
           <MoreHorizIcon fontSize="default"></MoreHorizIcon>
         </Button>
       </div>
@@ -39,18 +44,27 @@ function Post({ post }) {
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
+      <Typography sx={postStyles.title} variant="h5" gutterBottom>
+        {post.title}
+      </Typography>
       <CardContent>
-        <Typography sx={postStyles.title} variant="h5" gutterBottom>
+        <Typography variant="h6" gutterBottom>
           {post.description}
         </Typography>
       </CardContent>
       <CardActions sx={postStyles.cardActions}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button size="small" color="primary" onClick={() => {
+          dispatch(likePost(post._id))
+          dispatch(setCurrentId(null))
+        }}>
           <ThumbUpAltIcon fontSize="small" />
           Like
-          {post.likeCount}
+          {post.likecount}
         </Button>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button size="small" color="primary" onClick={() => {
+          dispatch(deletePost(post._id))
+          dispatch(setCurrentId(null))
+          }}>
           <DeleteIcon fontSize="small" />
           Delete
         </Button>
