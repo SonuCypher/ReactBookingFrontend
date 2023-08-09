@@ -48,7 +48,7 @@ function Post({ post }) {
         {post.title}
       </Typography>
       <CardContent>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="body2" color="textSecondary" component="p">
           {post.description}
         </Typography>
       </CardContent>
@@ -58,8 +58,9 @@ function Post({ post }) {
           dispatch(setCurrentId(null))
         }}>
           <ThumbUpAltIcon fontSize="small" />
-          Like
-          {post.likecount}
+          &nbsp;
+          {`Like  ${post.likecount}`}
+          
         </Button>
         <Button size="small" color="primary" onClick={() => {
           dispatch(deletePost(post._id))

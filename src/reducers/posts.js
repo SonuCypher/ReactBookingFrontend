@@ -1,19 +1,21 @@
+import { CREATE, DELETE, FETCH_ALL, LIKE, SETID, UPDATE } from "../constants/actionTypes";
+
 const postReducer = (state = { posts: [], currentId: null }, action) => {
   switch (action.type) {
-    case "FETCH_ALL":
+    case FETCH_ALL:
       return { ...state, posts: action.payload };
-    case "CREATE":
+    case CREATE:
       return [...state.posts, action.payload];
-    case "UPDATE":
+    case UPDATE:
       return state.posts.map((post) => post._id === action.payload._id ? action.payload : post );
         
      
-    case "DELETE":
+    case DELETE:
       return state.posts.filter((post) => post._id !== action.payload);
 
-    case "SETID":
+    case SETID:
       return { ...state, currentId: action.payload };
-    case "LIKEPOST":
+    case LIKE:
       return state.posts.map((post) => post._id === action.payload._id ? action.payload : post);
     default:
         return state.posts;
