@@ -9,6 +9,7 @@ import Form from "../Form/Form";
 function Home() {
   const dispatch = useDispatch();
   const currentId = useSelector((state) => state.posts.currentId);
+  // const auth = useSelector((state)=> state.auth.authData)
 
   useEffect(() => {
     dispatch(getPosts());

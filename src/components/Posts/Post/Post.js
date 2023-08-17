@@ -10,13 +10,28 @@ import {
 } from "@mui/material";
 import postStyles from "./styles";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbUpAltOutlined from '@mui/icons-material/ThumbUpAltOutlined';
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost, setCurrentId } from "../../../actions/posts";
 function Post({ post }) {
+  const user = JSON.parse(localStorage.getItem('profile'));
   const dispatch = useDispatch();
+  
+  const Likes = () => {
+    if (post.likes.length > 0) {
+      return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+        ? (
+          <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
+        ) : (
+          <><ThumbUpAltOutlined fontSize="small" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}</>
+        );
+    }
+    return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
+  }
+
   return (
     <Card sx={postStyles.card}>
       <CardMedia
@@ -25,12 +40,13 @@ function Post({ post }) {
         title={post.title}
       />
       <div style={postStyles.overlay}>
-        <Typography variant="h6">{post.creator}</Typography>
+        <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">
           {moment(post.createdAt).fromNow()}
         </Typography>
       </div>
-      <div style={postStyles.overlay2}>
+      {(user?.result?._id === post?.creator)&&(
+        <div style={postStyles.overlay2}>
         <Button
           style={{ color: "white" }}
           size="small"
@@ -39,6 +55,8 @@ function Post({ post }) {
           <MoreHorizIcon fontSize="default"></MoreHorizIcon>
         </Button>
       </div>
+      )}
+      
       <div style={postStyles.details}>
         <Typography variant="body2" color="textSecondary">
           {post.tags.map((tag) => `#${tag} `)}
@@ -53,22 +71,25 @@ function Post({ post }) {
         </Typography>
       </CardContent>
       <CardActions sx={postStyles.cardActions}>
-        <Button size="small" color="primary" onClick={() => {
+        <Button size="small" color="primary" disabled={!user?.result} onClick={() => {
           dispatch(likePost(post._id))
           dispatch(setCurrentId(null))
         }}>
-          <ThumbUpAltIcon fontSize="small" />
-          &nbsp;
-          {`Like  ${post.likecount}`}
+            <Likes />
           
         </Button>
-        <Button size="small" color="primary" onClick={() => {
-          dispatch(deletePost(post._id))
-          dispatch(setCurrentId(null))
-          }}>
-          <DeleteIcon fontSize="small" />
-          Delete
-        </Button>
+
+{(user?.result?._id === post?.creator) &&(
+ <Button size="small" color="primary" onClick={() => {
+  dispatch(deletePost(post._id))
+  dispatch(setCurrentId(null))
+  }}>
+  <DeleteIcon fontSize="small" />
+  Delete
+</Button>
+)}
+
+       
       </CardActions>
     </Card>
   );

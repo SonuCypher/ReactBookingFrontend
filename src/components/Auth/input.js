@@ -15,7 +15,7 @@ function Input(props) {
                 label={props.label}
                 autoFocus={props.autoFocus}
                 type={props.type}
-                InputProps={props.type === 'password' && {
+                InputProps={props.name === 'password' ? {
                     endAdornment:(
                         <InputAdornment position='end'>
                             <IconButton onClick={props.handleShowPassword}>
@@ -23,7 +23,7 @@ function Input(props) {
                             </IconButton>
                         </InputAdornment>
                     )
-                }}
+                } : null}
             />
         </Grid>
     )

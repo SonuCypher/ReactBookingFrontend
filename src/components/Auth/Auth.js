@@ -3,15 +3,40 @@ import { Styles } from './styles'
 import { Avatar, Button, Container, Grid, Paper, Typography } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Input from './input';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { signIn, signUp } from '../../actions/auth';
 
+const initialState = {firstName:'', lastName:'', email:'', password:''}
 function Auth() {
     const [showPassword,setShowPassword] = useState(false)
     const [isSignUp,setIsSignup] = useState(false)
+    const [formData , setFormData] = useState(initialState)
+    const dispatch=useDispatch()
+    const navigate = useNavigate()
+    
+    
+    
     const handleShowPassword = ()=>{
         setShowPassword((prevPass)=>!prevPass)
     }
-    const handleChange = () => {}
-    const handleSubmit=()=>{}
+
+    const handleChange = (e) => {
+        setFormData({ ...formData,[e.target.name]:e.target.value})
+
+       
+    }
+    
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        console.log(formData)
+        if(isSignUp){
+            dispatch(signUp(formData,navigate))
+        }else{
+            dispatch(signIn(formData,navigate))
+        }
+        navigate('/')
+    }
 
     const toggleSignup = ()=>{
         setIsSignup((prevState)=>!prevState)
@@ -36,7 +61,6 @@ function Auth() {
                         }
                         <Input name="email" label="Email" handleChange={handleChange} type="email" />
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
-                        {isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
                     </Grid>
                     <Button type = "submit" fullWidth variant='contained' color='primary' sx={Styles.submit} >
                         {isSignUp ? 'Sign Up':'Login'}
