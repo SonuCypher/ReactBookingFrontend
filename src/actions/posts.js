@@ -1,7 +1,20 @@
 import * as api from '../api'
-import { CREATE, DELETE, FETCH_ALL, LIKE, SETID, UPDATE } from '../constants/actionTypes'
+import { CREATE, DELETE, FETCH_ALL,FETCH_POST, LIKE, SETID, UPDATE } from '../constants/actionTypes'
 
 
+
+export const getPost = (id)=> async(dispatch)=>{
+    try {
+        const {data}= await api.fetchPost(id)
+        const action = { type :FETCH_POST,payload:data}
+        dispatch(action)
+    } catch (error) {
+        console.log(error.message)
+    }
+
+
+
+}
 export const getPosts = ()=> async(dispatch)=>{
     try {
         const {data}= await api.fetchPosts()
@@ -14,7 +27,6 @@ export const getPosts = ()=> async(dispatch)=>{
 
 
 }
-
 export const createPost = (post) => async (dispatch) =>{
     try {
         const {data}= await api.createPost(post)

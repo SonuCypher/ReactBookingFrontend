@@ -9,11 +9,12 @@ import Form from "../Form/Form";
 function Home() {
   const dispatch = useDispatch();
   const currentId = useSelector((state) => state.posts.currentId);
-  // const auth = useSelector((state)=> state.auth.authData)
+  const auth = useSelector((state)=> state.auth.authData)
+  console.log(auth)
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [currentId, dispatch]);
+  }, [currentId, dispatch,auth]);
   return (
     <Grow in>
       <Container>

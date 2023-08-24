@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { AppBar,Avatar,Button,Toolbar,Typography } from "@mui/material";
 import { appBarStyle,brandContainer,headingStyle,imageStyle, profile, toolbar, userName} from "./style"
 import {Link, useLocation, useNavigate} from "react-router-dom"
 import stillsites from "../../images/memories.png";
 import { useDispatch } from 'react-redux';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import ChatTwoToneIcon from '@mui/icons-material/ChatTwoTone';
 import decode from 'jwt-decode'
 
 
@@ -13,22 +15,26 @@ function Navbar() {
   const navigate = useNavigate()
   const location = useLocation()
   
-  const logout = () => {
+  const logout = useCallback(() => {
     dispatch({type:'LOGOUT'})
     navigate('/')
     setUser(null)
-  }
+  },[dispatch,navigate])
 
   useEffect(()=> {
     const token = user?.token
 
     if(token){
       const decodedToken = decode(token)
-      if(decodedToken.exp * 1000 < new Date().getTime()) logout()
+      if(decodedToken.exp * 1000 < new Date().getTime()){
+        dispatch({ type: 'LOGOUT' });
+      navigate('/');
+      setUser(null);
+      }
     }
 
     setUser(JSON.parse(localStorage.getItem('profile')))
-  },[location,user?.token])
+  },[location,user?.token,dispatch,navigate])
 
     return (
         <AppBar sx={appBarStyle} position="static" color="inherit">
@@ -42,6 +48,9 @@ function Navbar() {
         <Toolbar sx={toolbar}>
           {user ? (
             <div style={profile}>
+              <Button component={Link} to='/messenger'>
+              <ChatOutlinedIcon  fontSize='large'/>
+              </Button>
               <Avatar alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
               <Typography sx={userName} variant='h6'>{user.result.name}</Typography>
               <Button variant='contained' color='secondary' onClick={logout}>Logout</Button>
