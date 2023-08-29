@@ -6,7 +6,6 @@ import Input from './input';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signIn, signUp } from '../../actions/auth';
-import { setCurrentId } from '../../actions/posts';
 
 const initialState = {firstName:'', lastName:'', email:'', password:''}
 function Auth() {

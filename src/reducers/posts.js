@@ -1,4 +1,4 @@
-import { CREATE, DELETE, FETCH_ALL, FETCH_POST, LIKE, SETID, UPDATE } from "../constants/actionTypes";
+import { CREATE, DELETE, FETCH_ALL, FETCH_POST, LIKE, LOGOUT, SETID, UPDATE } from "../constants/actionTypes";
 
 const postReducer = (state = { posts: [], currentId: null }, action) => {
   switch (action.type) {
@@ -19,6 +19,8 @@ const postReducer = (state = { posts: [], currentId: null }, action) => {
       return { ...state, currentId: action.payload };
     case LIKE:
       return state.posts.map((post) => post._id === action.payload._id ? action.payload : post);
+    case LOGOUT:
+      return state  
     default:
         return state.posts;
         

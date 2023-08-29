@@ -5,12 +5,12 @@ import {Link, useLocation, useNavigate} from "react-router-dom"
 import stillsites from "../../images/memories.png";
 import { useDispatch } from 'react-redux';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
-import ChatTwoToneIcon from '@mui/icons-material/ChatTwoTone';
+// import ChatTwoToneIcon from '@mui/icons-material/ChatTwoTone';
 import decode from 'jwt-decode'
 
 
 function Navbar() {
-  const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  const [user,setUser] = useState(null)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -27,9 +27,10 @@ function Navbar() {
     if(token){
       const decodedToken = decode(token)
       if(decodedToken.exp * 1000 < new Date().getTime()){
+        setUser(null);
         dispatch({ type: 'LOGOUT' });
       navigate('/');
-      setUser(null);
+     
       }
     }
 
@@ -53,7 +54,7 @@ function Navbar() {
               </Button>
               <Avatar alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
               <Typography sx={userName} variant='h6'>{user.result.name}</Typography>
-              <Button variant='contained' color='secondary' onClick={logout}>Logout</Button>
+              <Button variant='contained' color='secondary' onClick={logout}>logout</Button>
             </div>
           ):(
             <Button component={Link} to='/auth' variant='contained' color = "primary">Sign in</Button>

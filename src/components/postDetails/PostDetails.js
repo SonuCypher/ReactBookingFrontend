@@ -36,7 +36,7 @@ function PostDetails() {
             </div>
           </div>
             </Paper>
-            <Paper sx={{Width:'35%',minWidth:'30%',borderRadius:'15px',backgroundColor:"transparent"}}>
+            <Paper sx={{Width:'35%',minWidth:'30%',borderRadius:'15px'}}>
             <Conversation /> 
             <Conversation /> 
             <Conversation /> 

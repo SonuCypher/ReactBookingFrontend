@@ -1,0 +1,24 @@
+.messenger{
+    display:'flex';
+    justify-content: space-between;
+}
+
+.chatMenu{
+    flex: 3.5;
+    background-color: rgb(86, 211, 18);
+}
+.chatBox{
+    flex: 5.5;
+    background-color: aliceblue;
+}
+.chatOnline{
+    flex: 3;
+    background-color: rgb(27, 135, 230);
+}
+.chatMenuWrapper,.chatBoxWrapper,.chatOnlineWrapper{
+  padding: 10px;
+  background-color: aqua;
+  height: 100%;
+}
+/* 
+*/
