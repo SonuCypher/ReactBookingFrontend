@@ -1,13 +1,14 @@
 .conversation{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 15px;
     cursor: pointer;
-    background-color: lightgray;
+    background-color: rgb(243, 204, 204);
     
 }
 .conversation:hover{
-    background-color: white;
+    background-color: rgb(246, 218, 218);
 
 }
 .conversationName{
