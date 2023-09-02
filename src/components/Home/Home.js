@@ -6,13 +6,15 @@ import { getPosts } from '../../actions/posts'
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
 
-function Home() {
+function Home({getAuth}) {
+  const token = JSON.parse(localStorage.getItem('profile'))
   const dispatch = useDispatch();
   const currentId = useSelector((state) => state.posts.currentId);
   const auth = useSelector((state)=> state.auth.authData)
   console.log(auth)
 
   useEffect(() => {
+    getAuth(token)
     dispatch(getPosts());
   }, [currentId, dispatch,auth]);
   return (

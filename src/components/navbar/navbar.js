@@ -41,20 +41,20 @@ function Navbar() {
         <AppBar sx={appBarStyle} position="static" color="inherit">
         <div style={brandContainer}>
 
-        <Typography component={Link} to="/" sx={headingStyle} variant="h2" align="center">
-          StillSites
+        <Typography component={Link} to="/" sx={headingStyle} variant="h3" align="center">
+          NomadTrails
         </Typography>
-        <img styles={imageStyle} src={stillsites} alt="stillsites" height="60" />
+        {/* <img styles={imageStyle} src={stillsites} alt="stillsites" height="60" /> */}
         </div>
         <Toolbar sx={toolbar}>
           {user ? (
             <div style={profile}>
               <Button component={Link} to='/messenger'>
-              <ChatOutlinedIcon  fontSize='large'/>
+              <ChatOutlinedIcon style={{fill:'#000338'}}  fontSize='large'/>
               </Button>
               <Avatar alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
               <Typography sx={userName} variant='h6'>{user.result.name}</Typography>
-              <Button variant='contained' color='secondary' onClick={logout}>logout</Button>
+              <Button variant='contained' style={{backgroundColor:'#000338'}} onClick={logout}>logout</Button>
             </div>
           ):(
             <Button component={Link} to='/auth' variant='contained' color = "primary">Sign in</Button>

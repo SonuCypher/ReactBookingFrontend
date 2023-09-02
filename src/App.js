@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState} from "react";
 import { Container } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./components/navbar/navbar";
@@ -11,9 +11,9 @@ import Messenger from "./components/Messenger/Messenger";
 
 function App() {
   
+const getAuth = (auth)=> setAuth(auth)
 
-
-  const auth = JSON.parse(localStorage.getItem('profile'))
+  const [auth,setAuth]=useState(JSON.parse(localStorage.getItem('profile')))
   console.log(auth)
 
   return (
@@ -21,7 +21,7 @@ function App() {
       <Container maxWidth="lg">
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home getAuth={getAuth} />} />
           <Route path="/posts/:id" element={auth ? <PostDetails />:<Navigate to="/auth" />} />
           <Route path="/auth" element={!auth ? <Auth /> : <Navigate to="/" />} />
           <Route path="/messenger" element={ auth ? <Messenger /> : <Navigate to="/auth" />}/>

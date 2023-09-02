@@ -5,10 +5,11 @@ export const appBarStyle = {
     flexDirection:'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding:'10px 30px'
+    padding:'10px 30px',
+    backgroundColor:'rgba(255, 255, 255, 0.56)',
 }
 export const headingStyle ={
-  color:'rgba(0,183,225,1)',
+  color:'#000338',
   textDecoration:'none'
 }
 export const imageStyle ={
