@@ -10,7 +10,8 @@ export const appBarStyle = {
 }
 export const headingStyle ={
   color:'#000338',
-  textDecoration:'none'
+  textDecoration:'none',
+  fontFamily:'fantasy',
 }
 export const imageStyle ={
   marginLeft:'15px',

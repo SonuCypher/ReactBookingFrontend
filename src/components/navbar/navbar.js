@@ -41,10 +41,10 @@ function Navbar() {
         <AppBar sx={appBarStyle} position="static" color="inherit">
         <div style={brandContainer}>
 
+        <img styles={imageStyle} src={stillsites} alt="stillsites" height="60" />
         <Typography component={Link} to="/" sx={headingStyle} variant="h3" align="center">
           NomadTrails
         </Typography>
-        {/* <img styles={imageStyle} src={stillsites} alt="stillsites" height="60" /> */}
         </div>
         <Toolbar sx={toolbar}>
           {user ? (

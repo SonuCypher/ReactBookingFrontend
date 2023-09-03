@@ -1,13 +1,22 @@
-.messenger{
+/* .messenger{
     display:'flex';
     width:'100%';
     justify-content: space-between;
-}
+} */
 
 .chatMenu{
     flex: 3.5;
-    background-color: rgb(86, 211, 18);
+    background-color: rgb(22, 108, 184);
 }
+
+.chatMenuInput{
+    width:100%;
+    padding: 10px 0;
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
 .chatBox{
     flex: 5.5;
     background-color: aliceblue;
@@ -18,7 +27,7 @@
 }
 .chatMenuWrapper,.chatBoxWrapper,.chatOnlineWrapper{
   padding: 10px;
-  background-color: aliceblue;
+  background-color: rgba(255, 255, 255, 0.632);
   height: 100%;
 }
 /* 

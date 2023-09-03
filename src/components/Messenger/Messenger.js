@@ -3,6 +3,7 @@ import "./Messenger.css";
 import * as api from '../../api'
 import React, { useEffect, useState } from 'react'
 import Conversation from '../conversation/Conversation'
+import Message from './Message/Message';
 
 
 function Messenger() {
@@ -25,21 +26,30 @@ function Messenger() {
 
 
     return (
-        <div style={{display:'flex',width:'100%',minHeight:'fit-content',backgroundColor:"white"}}>
+        <div style={{display:'flex',width:'100%',minHeight:'fit-content',backgroundColor:"white",fontFamily:"monospace"}}>
             <div className='chatMenu'>
-            <h1>hello</h1>
                 <div className='chatMenuWrapper'>
-                    <h1>hello</h1>
+                    <h3 className='chatMenuInput'>Chat</h3>
+                    <Conversation />
+                    <Conversation />
+                    <Conversation />
+                    <Conversation />
+                    <Conversation />
                 </div>
             </div>
             <div className='chatBox'>
-            <h1>hello</h1>
                 <div className='chatBoxWrapper'>
-                <h1>hello</h1>
+                <div className='chatBoxTop'>
+                    <Message />
+                    <Message />
+                    <Message />
+                </div>
+                <div className='chatBoxBottom'>
+
+                </div>
                 </div>
             </div>
             <div className='chatOnline'>
-            <h1>hello</h1>
                 <div className='chatOnlineWrapper'>
                 <h1>hello</h1>
                 </div>

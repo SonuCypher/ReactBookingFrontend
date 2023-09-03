@@ -6,8 +6,9 @@ function Conversation({chat,user}) {
     
     return (
         <div className='conversation'>
-            <PersonIcon />
-            <span className='conversationName'>Conversation</span>
+            
+            <img className='conversationImg' src='https://cdn.icon-icons.com/icons2/2148/PNG/512/nomad_icon_132150.png' alt={<PersonIcon />}/>
+            <span className='conversationName'>jhon wick</span>
         </div>
     )
 }
