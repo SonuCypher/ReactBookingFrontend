@@ -4,6 +4,7 @@ import * as api from '../../api'
 import React, { useEffect, useState } from 'react'
 import Conversation from '../conversation/Conversation'
 import Message from './Message/Message';
+import Online from './online/Online';
 
 
 function Messenger() {
@@ -26,7 +27,7 @@ function Messenger() {
 
 
     return (
-        <div style={{display:'flex',width:'100%',minHeight:'fit-content',backgroundColor:"white",fontFamily:"monospace"}}>
+        <div style={{display:'flex',width:'100%',maxHeight:'450px',backgroundColor:"white",fontFamily:"monospace"}}>
             <div className='chatMenu'>
                 <div className='chatMenuWrapper'>
                     <h3 className='chatMenuInput'>Chat</h3>
@@ -41,17 +42,23 @@ function Messenger() {
                 <div className='chatBoxWrapper'>
                 <div className='chatBoxTop'>
                     <Message />
+                    <Message self={true} />
+                    <Message />
+                    <Message />
+                    <Message />
+                    <Message />
                     <Message />
                     <Message />
                 </div>
                 <div className='chatBoxBottom'>
-
+                    <textarea className='chatMessageInput' placeholder='write something...'></textarea>
+                    <button className='chatSubmitButton'>Send</button>
                 </div>
                 </div>
             </div>
             <div className='chatOnline'>
                 <div className='chatOnlineWrapper'>
-                <h1>hello</h1>
+                <Online />
                 </div>
             </div>
 

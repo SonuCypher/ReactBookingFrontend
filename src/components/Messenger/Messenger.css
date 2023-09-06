@@ -6,7 +6,7 @@
 
 .chatMenu{
     flex: 3.5;
-    background-color: rgb(22, 108, 184);
+    background-color: white;
 }
 
 .chatMenuInput{
@@ -19,15 +19,47 @@
 
 .chatBox{
     flex: 5.5;
-    background-color: aliceblue;
+    background-color: white;
 }
+.chatBoxWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.chatBoxTop{
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 10px;
+}
+.chatBoxBottom{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chatMessageInput{
+    width:80% ;
+    height: 100%;
+    padding: 10px;
+}
+
+.chatSubmitButton{
+    width: 70px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color:rgb(108, 165, 215);
+
+}
+
 .chatOnline{
     flex: 3;
-    background-color: rgb(27, 135, 230);
+    background-color:white;
 }
 .chatMenuWrapper,.chatBoxWrapper,.chatOnlineWrapper{
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.632);
+  background-color: white;
   height: 100%;
 }
 /* 
