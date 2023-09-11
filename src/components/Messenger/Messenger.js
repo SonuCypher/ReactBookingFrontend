@@ -5,16 +5,23 @@ import React, { useEffect, useRef, useState } from "react";
 import Conversation from "../conversation/Conversation";
 import Message from "./Message/Message";
 import Online from "./online/Online";
+import {io} from "socket.io-client"
+import { useSelector } from "react-redux";
 
 function Messenger() {
   const [userChats, setUserChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+//   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [socket, setSocket] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const user = JSON.parse(localStorage.getItem("profile"));
+  const auth = useSelector((state)=> state.auth.authData)
   const scrollRef = useRef()
 
   console.log(user?.result._id);
+  console.log("online users", onlineUsers)
   const getUserChat = async (id) => {
     try {
       return await api.fetchUserChat(id);
@@ -30,6 +37,51 @@ function Messenger() {
       console.log(error);
     }
   };
+
+
+  useEffect(()=>{
+    setSocket(io("http://localhost:3001"))
+    console.log("socket connected")
+
+    return ()=>{
+        io("http://localhost:3001").disconnect()
+    }
+  },[auth])
+
+//   useEffect(()=>{
+//     socket?.on("getMessage",data =>{
+//         console.log("getMessage",data)
+//         setArrivalMessage({
+//             sender:data.senderId,
+//             text:data.text,
+//             createdAt:Date.now(),
+//         })
+//     })
+//   },[])
+
+//   useEffect(()=>{
+//     arrivalMessage && currentChat?.members.includes(arrivalMessage?.sender) &&
+//     setMessages((prev)=>[...prev,arrivalMessage])
+//     console.log("message",messages)
+//   },[arrivalMessage,currentChat])
+
+  useEffect(()=>{
+    socket?.emit("addNewUser",user?.result._id)
+    socket?.on("getOnlineUsers",(res)=>{
+        setOnlineUsers(res)
+    })
+
+    return ()=>{
+        socket?.off("getOnlineUsers")
+    }
+  },[socket])
+
+  useEffect(()=>{
+    socket?.on("welcome", message => console.log(message))
+  },[socket])
+
+
+
 ///// getting userchat effect
   useEffect(() => {
     getUserChat(user?.result._id)
@@ -61,13 +113,24 @@ useEffect(()=>{
     scrollRef.current?.scrollIntoView({behavior:"smooth"})
 },[messages])
 
-const handleSubmit= async(e)=>{
+
+/////
+const handleSubmit = async(e)=>{
     e.preventDefault()
     const message = {
         senderId:user?.result._id,
         text:newMessage,
         chatId:currentChat?._id
     }
+
+    // const recieverId = currentChat?.members.find(member => member !== user?.result._id)
+
+    // socket?.emit("sendMessage",{
+    //     senderId:user?.result._id,
+    //     recieverId,
+    //     text:newMessage,
+    // })
+
     try {
        const res = await api.createUserMessage(message) 
        setMessages([...messages,res.data])
@@ -76,6 +139,7 @@ const handleSubmit= async(e)=>{
         console.log(error)
     }
 }
+////////
 
   return (
     <div
@@ -104,8 +168,8 @@ const handleSubmit= async(e)=>{
           {currentChat ? (
             <>
               <div className="chatBoxTop">
-                {messages?.map((m) => (
-                    <div ref={scrollRef}>
+                {messages?.map((m,i) => (
+                    <div ref={scrollRef} key={i}>
                   <Message message={m} self={m.senderId === user?.result._id} />
                     </div>
                 ))}
