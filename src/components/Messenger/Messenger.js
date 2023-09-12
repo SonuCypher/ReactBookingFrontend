@@ -1,4 +1,4 @@
-import { CircularProgress, Paper } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import "./Messenger.css";
 import * as api from "../../api";
 import React, { useEffect, useRef, useState } from "react";
@@ -13,15 +13,15 @@ function Messenger() {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-//   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [socket, setSocket] = useState(null);
-  const [onlineUsers, setOnlineUsers] = useState([]);
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+
+  const socket = useRef()
+
+  const [user,setUser]=useState(JSON.parse(localStorage.getItem("profile")));
   const auth = useSelector((state)=> state.auth.authData)
   const scrollRef = useRef()
 
-  console.log(user?.result._id);
-  console.log("online users", onlineUsers)
+
   const getUserChat = async (id) => {
     try {
       return await api.fetchUserChat(id);
@@ -38,26 +38,55 @@ function Messenger() {
     }
   };
 
-
-  useEffect(()=>{
-    setSocket(io("http://localhost:3001"))
-    console.log("socket connected")
-
-    return ()=>{
-        io("http://localhost:3001").disconnect()
-    }
-  },[auth])
-
+///////////SOCKET///////////////////////////
 //   useEffect(()=>{
-//     socket?.on("getMessage",data =>{
-//         console.log("getMessage",data)
-//         setArrivalMessage({
-//             sender:data.senderId,
-//             text:data.text,
-//             createdAt:Date.now(),
-//         })
-//     })
+//     setSocket(io("http://localhost:3001"))
+//     console.log("socket connected")
+
+//     return ()=>{
+//         io("http://localhost:3001").disconnect()
+//     }
 //   },[])
+
+/*useEffect(()=>{
+    socket?.on("welcome", message => console.log(message))
+},[socket])*/
+
+useEffect(()=>{
+    socket.current = io("http://localhost:3001")
+    socket.current.on("getMessage", data =>{
+        setArrivalMessage({
+            sender: data.senderId,
+            text:data.text,
+            createdAt: Date.now(),
+        })
+    })
+},[])
+
+useEffect(()=>{
+    arrivalMessage && 
+    currentChat?.members.includes(arrivalMessage?.sender)&&
+    setMessages((prev)=>[...prev,arrivalMessage])
+},[arrivalMessage,currentChat])
+
+useEffect(()=>{
+    socket.current.emit("addUser", user.result._id)
+    console.log("userid:", user.result._id)
+    socket.current.on("getUsers", users=>{
+        console.log("online",users)
+    })
+},[user])
+
+//    useEffect(()=>{
+//      socket?.on("getMessage",data =>{
+//          console.log("getMessage",data)
+//          setArrivalMessage({
+//              sender:data.senderId,
+//              text:data.text,
+//              createdAt:Date.now(),
+//          })
+//      })
+//    },[])
 
 //   useEffect(()=>{
 //     arrivalMessage && currentChat?.members.includes(arrivalMessage?.sender) &&
@@ -65,20 +94,18 @@ function Messenger() {
 //     console.log("message",messages)
 //   },[arrivalMessage,currentChat])
 
-  useEffect(()=>{
-    socket?.emit("addNewUser",user?.result._id)
-    socket?.on("getOnlineUsers",(res)=>{
-        setOnlineUsers(res)
-    })
+//   useEffect(()=>{
+//     socket?.emit("addNewUser",user?.result._id)
+//     socket?.on("getOnlineUsers",(res)=>{
+//         setOnlineUsers(res)
+//     })
 
-    return ()=>{
-        socket?.off("getOnlineUsers")
-    }
-  },[socket])
+//     return ()=>{
+//         socket?.off("getOnlineUsers")
+//     }
+//   },[socket])
 
-  useEffect(()=>{
-    socket?.on("welcome", message => console.log(message))
-  },[socket])
+////////////SOCKET////////////////////
 
 
 
@@ -123,13 +150,12 @@ const handleSubmit = async(e)=>{
         chatId:currentChat?._id
     }
 
-    // const recieverId = currentChat?.members.find(member => member !== user?.result._id)
-
-    // socket?.emit("sendMessage",{
-    //     senderId:user?.result._id,
-    //     recieverId,
-    //     text:newMessage,
-    // })
+    const recieverId = currentChat?.members.find(member => member !== user?.result._id)
+      socket.current.emit("sendMessage",{
+          senderId:user.result._id,
+          recieverId,
+          text:newMessage,
+      })
 
     try {
        const res = await api.createUserMessage(message) 

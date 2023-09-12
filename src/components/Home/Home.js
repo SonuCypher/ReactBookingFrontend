@@ -11,7 +11,7 @@ function Home({getAuth}) {
   const dispatch = useDispatch();
   const currentId = useSelector((state) => state.posts.currentId);
   const auth = useSelector((state)=> state.auth.authData)
-  console.log(auth)
+  console.log("auth:",auth?.result)
 
   useEffect(() => {
     getAuth(token)
