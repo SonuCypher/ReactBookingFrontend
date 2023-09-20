@@ -41,7 +41,8 @@
       margin: '20px',
     },
     title: {
-      padding: '0 16px'
+      padding: '0 16px',
+      cursor: 'pointer',
     },
     cardActions: {
       padding: '0 16px 8px 16px',

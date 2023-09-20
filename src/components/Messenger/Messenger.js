@@ -39,18 +39,7 @@ function Messenger() {
   };
 
 ///////////SOCKET///////////////////////////
-//   useEffect(()=>{
-//     setSocket(io("http://localhost:3001"))
-//     console.log("socket connected")
 
-//     return ()=>{
-//         io("http://localhost:3001").disconnect()
-//     }
-//   },[])
-
-/*useEffect(()=>{
-    socket?.on("welcome", message => console.log(message))
-},[socket])*/
 
 useEffect(()=>{
     socket.current = io("http://localhost:3001")
@@ -77,33 +66,6 @@ useEffect(()=>{
     })
 },[user])
 
-//    useEffect(()=>{
-//      socket?.on("getMessage",data =>{
-//          console.log("getMessage",data)
-//          setArrivalMessage({
-//              sender:data.senderId,
-//              text:data.text,
-//              createdAt:Date.now(),
-//          })
-//      })
-//    },[])
-
-//   useEffect(()=>{
-//     arrivalMessage && currentChat?.members.includes(arrivalMessage?.sender) &&
-//     setMessages((prev)=>[...prev,arrivalMessage])
-//     console.log("message",messages)
-//   },[arrivalMessage,currentChat])
-
-//   useEffect(()=>{
-//     socket?.emit("addNewUser",user?.result._id)
-//     socket?.on("getOnlineUsers",(res)=>{
-//         setOnlineUsers(res)
-//     })
-
-//     return ()=>{
-//         socket?.off("getOnlineUsers")
-//     }
-//   },[socket])
 
 ////////////SOCKET////////////////////
 
@@ -113,7 +75,7 @@ useEffect(()=>{
   useEffect(() => {
     getUserChat(user?.result._id)
       .then((chat) => {
-        // console.log(chat.data);
+        console.log("userChats",chat.data);
         setUserChats(chat.data);
       })
       .catch((error) => {
@@ -179,7 +141,7 @@ const handleSubmit = async(e)=>{
     >
       <div className="chatMenu">
         <div className="chatMenuWrapper">
-          <h3 className="chatMenuInput">Chat</h3>
+          <div className="chatMenuInput">Your Chat</div>
           {userChats.map((chat, index) => {
             return (
               <div onClick={() => setCurrentChat(chat)} key={index}>
@@ -220,6 +182,7 @@ const handleSubmit = async(e)=>{
       </div>
       <div className="chatOnline">
         <div className="chatOnlineWrapper">
+        <div className="chatMenuInput">Your Chat</div>
           <Online />
         </div>
       </div>
@@ -229,28 +192,4 @@ const handleSubmit = async(e)=>{
 
 export default Messenger;
 
-/* 
-        <div style={{display:'flex',justifyContent:"space-between",height:'200px'}}>
-            <Paper sx={{width:'20%',height:'100%'}}>
-                {
-                   userChats ? userChats?.map((chat,index)=>{
-                        return(
-                            <div key={index}>
-                                <Conversation chat={chat} user={user?.result} />
 
-                            </div>
-                        )
-                    }) : <CircularProgress />
-                }
-            </Paper>
-            <Paper sx={{width:'33%',height:'100%',padding:'15px'}}>
-                <div style={{padding:'10px'}}>
-
-                </div>
-                
-            </Paper>
-            <Paper sx={{width:'20%',height:'100%',padding:'15px'}}>
-                online
-            </Paper>
-        </div>
-*/
