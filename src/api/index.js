@@ -21,6 +21,8 @@ export const likePost = (id) => API.patch(`/posts/${id}/likePost`)
 export const signIn = (formData)=> API.post('/users/signin',formData)
 export const signUp = (formData)=> API.post('/users/signup',formData)
 export const getUser = (id)=>API.get(`/users/${id}`)
+export const getUserFriends = (id)=>API.get(`/users/friends/${id}`)
+
 
 export const fetchUserChat = (id)=> API.get(`/chat/${id}`)
 export const createUserChat= (newChat)=>API.post('/chat',newChat)
