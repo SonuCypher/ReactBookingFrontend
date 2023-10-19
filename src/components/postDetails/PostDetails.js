@@ -20,7 +20,7 @@ function PostDetails() {
     if(post){
         return (
 
-         <div style={{display:'flex',justifyContent:"space-between"}}>
+         <div style={{display:'flex',justifyContent:"center"}}>
                <Paper sx={{minWidth:"300px",padding:'20px', borderRadius:'15px',display:'flex',width:'35%'}} elevation={6}>
             <div >
             <div>
@@ -36,9 +36,9 @@ function PostDetails() {
             </div>
           </div>
             </Paper>
-            <Paper sx={{Width:'35%',minWidth:'30%',borderRadius:'15px'}}>
+            {/* <Paper sx={{Width:'35%',minWidth:'30%',borderRadius:'15px'}}>
           
-            </Paper>
+            </Paper> */}
          </div>
         )
 

@@ -43,7 +43,7 @@ function Navbar() {
 
         <img styles={imageStyle} src={stillsites} alt="stillsites" height="60" />
         <Typography component={Link} to="/" sx={headingStyle} variant="h3" align="center">
-          NomadTrails
+          NomadRoad
         </Typography>
         </div>
         <Toolbar sx={toolbar}>

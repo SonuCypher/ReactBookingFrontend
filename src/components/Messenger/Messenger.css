@@ -6,23 +6,24 @@
 
 .chatMenu{
     flex: 3.5;
-    background-color: rgb(19, 189, 56);
+    background-color:white
 }
 
 .chatMenuInput{
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     width:100%;
     font-weight: bold;
     font-size:0.8cm;
-    background-color: rgb(255, 255, 255);
+    background-color: #371e41;
     padding: 15px 0;
     text-align: center;
+    border: 1px solid black;
 }
 
 .chatBox{
     flex: 5.5;
     background-color: white;
-    border: 2px solid rgb(83, 91, 10);
+    /* border: 2px solid rgb(83, 91, 10); */
     height: 460px;
 }
 .chatBoxWrapper{
@@ -30,28 +31,30 @@
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    border: 2px solid rgb(185, 206, 0);
-    background-color:rgb(218, 127, 127);
+    /* border: 2px solid rgb(185, 206, 0); */
+    background-color:#6c71c2;
     height: 100%;
 }
 .chatBoxTop{
     height: 100%;
     overflow-y: scroll;
     padding-right: 10px;
-    border: 2px solid green;
+    /* border: 2px solid green; */
+    background-color: rgb(155, 122, 186);
 }
 .chatBoxBottom{
     margin-top: 5px;
-    /* margin-bottom: 5px; */
+    margin-bottom: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 2px solid green;
+    /* border: 2px solid green; */
 }
 .chatMessageInput{
     width:80% ;
     /* height: 98%; */
     padding: 10px;
+    margin-left: 10px;
 }
 
 .chatSubmitButton{
@@ -59,7 +62,10 @@
     height: 40px;
     border: none;
     border-radius: 5px;
-    background-color:rgb(108, 165, 215);
+     background-color: #000338; 
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
 
 }
 
@@ -70,15 +76,21 @@
 
 .chatMenuWrapper{
     padding-bottom: 10px;
-    background-color:rgb(4, 4, 37);;
+    background-color:#e3a1f8;
     height: 100%;
-    border: 2px solid rgb(176, 53, 0);
+    /* border: 2px solid rgb(176, 53, 0); */
 }
 .noChat{
     position: absolute;
-    top:30%;
+    top:10%;
+    left: 30%;
     font-size: 30px;
     cursor: default;
+    border: 2px solid rgb(0, 0, 0);
 }
+/* .noChatWrap{
+    background-color: rgb(157, 124, 188);
+    border: 2px solid rgb(0, 0, 0);
+} */
 /* 
 */

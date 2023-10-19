@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 function Messenger() {
   const [userChats, setUserChats] = useState([]);
+  const [chatMenuInput, setChatMenuInput] = useState("Your Chats");
   const [userFriends, setUserFriends] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -46,6 +47,16 @@ function Messenger() {
       console.error(error);
     }
   }
+
+  const createUserChat = async(firstId,secondId)=>{
+    try {
+      return await api.createUserChat({firstId,secondId})
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
 
 ///////////SOCKET///////////////////////////
 
@@ -108,14 +119,14 @@ useEffect(()=>{
   useEffect(() => {
     getUserMessages(currentChat?._id)
       .then((m) => {
-        // console.log(m.data);
+         console.log(m.data);
         setMessages(m.data);
       })
       .catch((error) => {
         console.log(error);
       });
+      console.log('messages', messages);
   }, [currentChat]);
-//   console.log(`messages:${messages}`);
 
 //////// useRef effect
 useEffect(()=>{
@@ -157,16 +168,26 @@ style={{
   maxHeight: "450px",
   backgroundColor: "white",
   fontFamily: "monospace",
-  border: "2px solid white",
+  // border: "1px solid white",
   // overflow:"scroll"
 }}
 >
 <div className="chatMenu">
   <div className="chatMenuWrapper">
-    <div className="chatMenuInput">Your Chat</div>
+    <div className="chatMenuInput">{chatMenuInput}</div>
     {userFriends.map((friend, index) => {
       return (
-        <div key={index}>
+        <div onClick={()=>{
+          createUserChat(user?.result._id, friend._id)
+          .then((chat) => {
+            console.log("userChats",chat.data);
+            setCurrentChat(chat.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          setChatMenuInput(friend.name)
+        }} key={index}>
           <Conversation friend={friend} />
         </div>
       );
@@ -195,10 +216,10 @@ style={{
         </div>
       </>
     ) : (
-      <>
+      <div className="noChatWrap">
         <span className="noChat">Click on any chat</span>
-        <CircularProgress />
-      </>
+        {/* <CircularProgress sx={{position:"absolute",top:"20%",left:"45%"}} /> */}
+      </div>
     )}
   </div>
 </div>
