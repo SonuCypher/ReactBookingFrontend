@@ -5,7 +5,6 @@ import {Link, useLocation, useNavigate} from "react-router-dom"
 import stillsites from "../../images/memories.png";
 import { useDispatch } from 'react-redux';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
-// import ChatTwoToneIcon from '@mui/icons-material/ChatTwoTone';
 import decode from 'jwt-decode'
 
 
